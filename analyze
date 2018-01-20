@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+"""
+File: analyze (3.X)
+Analyzes a server log file
+
+python3 analyze <analyzer> <file> <options>
+
+Available analyzers:
+
+  * Combined access log: `access/combined`
+
+The following options are available:
+
+  --daterange       Return only logs within the given range
+                    Format: '%d/%b/%Y:%H:%M:%S %z,%d/%b/%Y:%H:%M:%S %z'
+                    Example: '17/Sep/2017:03:32:49 -0400,17/Sep/2017:03:32:49 -0400'
+"""
+
+# python3 analyze access/combined files/shortened-access.log --daterange='17/Sep/2017:03:32:00 -0400,17/Sep/2017:03:32:49 -0400'
+
+import sys
+# import pprint
+from parsers.argumentparser import ArgumentParser
+
+
+# dynamically load the parser
+logparsers = {
+  'access/combined': {
+    'package': 'parsers.access.combined',
+    'name': 'Combined'
+  }
+}
+parser = logparsers.get(sys.argv[1])
+LogParser = getattr(__import__(parser.get('package'), fromlist=[parser.get('name')]), parser.get('name'))
+
+
+# parse the options
+argparser = ArgumentParser(sys.argv[3:])
+options = argparser.parse()
+
+
+# parse logs
+parser = LogParser(open(sys.argv[2], 'r'), options)
+results = parser.parse()
+
+
+# print results
+# pp = pprint.PrettyPrinter(indent=2)
+for result in results:
+  # pp.pprint(result)
+  print(result)

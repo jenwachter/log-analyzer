@@ -1,2 +1,3 @@
-# log-analyzer
+# Log analyzer
+
 Analyzes server log files
