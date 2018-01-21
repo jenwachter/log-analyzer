@@ -43,5 +43,8 @@ class ArgumentParser:
   def parse__url(self, value):
     return value
 
+  def parse__useragent(self, value):
+    return value
+
   def formatDate(self, value):
     return datetime.strptime(value.strip(), '%d/%b/%Y:%H:%M:%S %z')

@@ -20,6 +20,9 @@ The following options are available:
 
   --url             Return only logs that match a certain request url
                     Format: regular expression
+
+  --useragent       Return only logs that match a certain user agent
+                    Format: regular expression
 """
 
 # python3 analyze access/combined files/shortened-access.log --daterange='17/Sep/2017:03:32:00 -0400,17/Sep/2017:03:32:49 -0400'

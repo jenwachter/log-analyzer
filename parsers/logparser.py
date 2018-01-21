@@ -96,5 +96,12 @@ class LogParser:
 
 
   def filter__url(self, log):
-    url = self.options.get('url')
-    return re.search(url, log.url) is not None
+    return self.regularExpressionSearch('url', log)
+
+
+  def filter__useragent(self, log):
+    return self.regularExpressionSearch('useragent', log)
+
+  def regularExpressionSearch(self, key, log):
+    regex = self.options.get(key)
+    return re.search(regex, getattr(log, key)) is not None
