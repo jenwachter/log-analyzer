@@ -1,5 +1,6 @@
-import re
 from datetime import datetime
+import re
+import sys
 
 class ArgumentParser:
   """Parse command-line arguments
@@ -8,8 +9,6 @@ class ArgumentParser:
   label -- this match's label
   match -- the matched string
   """
-
-  acceptedArguments = ['ip', 'daterange']
 
   def __init__(self, arguments):
     self.arguments = arguments
@@ -22,14 +21,14 @@ class ArgumentParser:
 
       match = re.match(regex, argument).groups()
       key = match[0]
-
-      if key not in self.acceptedArguments:
-        continue
-
       value = match[1]
-
       method = 'parse__' + key
-      parsed[key] = getattr(self, method)(value)
+
+      try:
+        parsed[key] = getattr(self, method)(value)
+      except:
+        print('Invalid option: \'%s\'' % key)
+        sys.exit(1)
 
     return parsed
 
