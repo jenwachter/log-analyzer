@@ -93,3 +93,8 @@ class LogParser:
   def filter__ip(self, log):
     ips = self.options.get('ip')
     return log.ip in ips
+
+
+  def filter__url(self, log):
+    url = self.options.get('url')
+    return re.search(url, log.url) is not None

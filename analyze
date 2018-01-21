@@ -17,6 +17,9 @@ The following options are available:
 
   --ip              Return only logs with certain IPs. Comma separated list.
                     Format: 'IP' or 'IP,IP'
+
+  --url             Return only logs that match a certain request url
+                    Format: regular expression
 """
 
 # python3 analyze access/combined files/shortened-access.log --daterange='17/Sep/2017:03:32:00 -0400,17/Sep/2017:03:32:49 -0400'
