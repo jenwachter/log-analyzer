@@ -33,12 +33,12 @@ class ArgumentParser:
 
     return parsed
 
-  def parse__ip(self, value):
-    return value.split(',')
 
   def parse__daterange(self, value):
     dates = value.split(',')
     return [self.formatDate(date) for date in dates]
 
+  def parse__ip(self, value):
+    return value.split(',')
   def formatDate(self, value):
     return datetime.strptime(value.strip(), '%d/%b/%Y:%H:%M:%S %z')

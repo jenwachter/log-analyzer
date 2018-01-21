@@ -88,3 +88,8 @@ class LogParser:
     end = daterange[1]
 
     return start <= log.datetime <= end
+
+
+  def filter__ip(self, log):
+    ips = self.options.get('ip')
+    return log.ip in ips
