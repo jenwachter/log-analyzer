@@ -19,7 +19,6 @@ The following options are available:
 # python3 analyze access/combined files/shortened-access.log --daterange='17/Sep/2017:03:32:00 -0400,17/Sep/2017:03:32:49 -0400'
 
 import sys
-# import pprint
 from parsers.argumentparser import ArgumentParser
 
 
@@ -43,9 +42,6 @@ options = argparser.parse()
 parser = LogParser(open(sys.argv[2], 'r'), options)
 results = parser.parse()
 
-
 # print results
-# pp = pprint.PrettyPrinter(indent=2)
 for result in results:
-  # pp.pprint(result)
   print(result)
