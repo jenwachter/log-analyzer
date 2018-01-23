@@ -3,6 +3,7 @@ from datetime import datetime
 from log import Log
 
 class LogParser:
+  datetimeFormat = '%d/%b/%Y:%H:%M:%S %z'
 
   def __init__(self, logs, options):
     self.logs = logs

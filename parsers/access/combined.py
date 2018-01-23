@@ -24,5 +24,3 @@ class Combined(LogParser):
   '.*$')                                                    # the rest
 
   matchmap = ['ip', 'datetime', 'method', 'url', 'useragent']
-
-  datetimeFormat = '%d/%b/%Y:%H:%M:%S %z'
