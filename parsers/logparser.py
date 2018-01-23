@@ -76,7 +76,7 @@ class LogParser(metaclass=ABCMeta):
         Description of returned object.
     """
     if label is 'datetime':
-      return datetime.strptime(match, self.datetimeFormat)
+      match = datetime.strptime(match, self.datetimeFormat)
 
     return match
 
