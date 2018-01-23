@@ -1,9 +1,22 @@
 import re
+
+from abc import ABCMeta, abstractmethod
 from datetime import datetime
 from log import Log
 
-class LogParser:
+class LogParser(metaclass=ABCMeta):
+
   datetimeFormat = '%d/%b/%Y:%H:%M:%S %z'
+
+  @property
+  @abstractmethod
+  def pattern(self):
+    pass
+
+  @property
+  @abstractmethod
+  def matchmap(self):
+    pass
 
   def __init__(self, logs, options):
     self.logs = logs
