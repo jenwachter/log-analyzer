@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/local/bin/python3
 """
 File: analyze (3.X)
 Analyzes a server log file
 
-python3 analyze <analyzer> <file> <options>
+analyze <analyzer> <file> <options>
 
 Available analyzers:
 
@@ -25,7 +25,12 @@ The following options are available:
                     Format: regular expression
 """
 
-# python3 analyze access/combined files/shortened-access.log --daterange='17/Sep/2017:03:32:00 -0400,17/Sep/2017:03:32:49 -0400'
+#
+# ./analyze access/combined ~/Desktop/logs/hub-ssl.access --url=baltimore-food-deserts --daterange='23/Jan/2018:08:38:45 -0500,23/Jan/2018:08:38:59 -0500'
+# ./analyze access/combined files/jhu-ssl.access --daterange='01/Jul/2018:03:23:16 -0400,01/Jul/2018:03:23:30 -0400'
+# ./analyze access/combined files/jhu-ssl.access --ip=23.67.53.60
+# ./analyze access/combined files/shortened-access.log --useragent=Chrome
+# ./analyze access/combined files/shortened-access.log --useragent=Chrome
 
 import sys
 from parsers.argument import ArgumentParser
