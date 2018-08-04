@@ -3,7 +3,7 @@
 File: analyze (3.X)
 Analyzes a server log file
 
-analyze <analyzer> <file> <options>
+analyze <file> <options>
 
 Available analyzers:
 
@@ -26,34 +26,44 @@ The following options are available:
 """
 
 #
-# ./analyze access/combined ~/Desktop/logs/hub-ssl.access --url=baltimore-food-deserts --daterange='23/Jan/2018:08:38:45 -0500,23/Jan/2018:08:38:59 -0500'
-# ./analyze access/combined files/jhu-ssl.access --daterange='01/Jul/2018:03:23:16 -0400,01/Jul/2018:03:23:30 -0400'
-# ./analyze access/combined files/jhu-ssl.access --ip=23.67.53.60
-# ./analyze access/combined files/shortened-access.log --useragent=Chrome
-# ./analyze access/combined files/shortened-access.log --useragent=Chrome
+# ./analyze ~/Desktop/logs/hub-ssl.access --url=baltimore-food-deserts --daterange='23/Jan/2018:08:38:45 -0500,23/Jan/2018:08:38:59 -0500'
+# ./analyze files/jhu-ssl.access --daterange='01/Jul/2018:03:23:16 -0400,01/Jul/2018:03:23:30 -0400'
+# ./analyze files/jhu-ssl.access --ip=23.67.53.60
+# ./analyze files/shortened-access.log --useragent=Chrome
+# ./analyze files/shortened-access.log --useragent=Chrome
 
 import sys
 from parsers.argument import ArgumentParser
 
+from parsers.access.combined import Combined
+LogParser = Combined
 
-# dynamically load the parser
-logparsers = {
-  'access/combined': {
-    'package': 'parsers.access.combined',
-    'name': 'Combined'
-  }
-}
-parser = logparsers.get(sys.argv[1])
-LogParser = getattr(__import__(parser.get('package'), fromlist=[parser.get('name')]), parser.get('name'))
+args = sys.argv[2:]
+file = sys.argv[1]
+
+
+# # use this when there is more than one parser
+# # dynamically load the parser
+# logparsers = {
+#   'access/combined': {
+#     'package': 'parsers.access.combined',
+#     'name': 'Combined'
+#   }
+# }
+# parser = logparsers.get(sys.argv[1])
+# LogParser = getattr(__import__(parser.get('package'), fromlist=[parser.get('name')]), parser.get('name'))
+#
+# args = sys.argv[3:]
+# file = sys.argv[2]
 
 
 # parse the options
-argparser = ArgumentParser(sys.argv[3:])
+argparser = ArgumentParser(args)
 options = argparser.parse()
 
 
 # parse logs
-parser = LogParser(open(sys.argv[2], 'r'), options)
+parser = LogParser(open(file, 'r'), options)
 results = parser.parse()
 
 # print results
