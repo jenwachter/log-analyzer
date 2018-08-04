@@ -3,7 +3,7 @@ Combined Access Log Parser
 http://httpd.apache.org/docs/current/logs.html#combined
 """
 
-from parsers.logparser import LogParser
+from parsers.log import LogParser
 
 class Combined(LogParser):
 

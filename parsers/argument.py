@@ -27,7 +27,7 @@ class ArgumentParser:
       try:
         parsed[key] = getattr(self, method)(value)
       except:
-        print('Invalid option: \'%s\'' % key)
+        print('Invalid option: \'{0}\''.format(key))
         sys.exit(1)
 
     return parsed

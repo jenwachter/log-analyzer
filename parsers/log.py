@@ -54,11 +54,12 @@ class LogParser(metaclass=ABCMeta):
         keep = getattr(self, method)(cleaned)
 
         # if we don't need to keep this log, break out now
-        if keep is False: break
+        if keep is False:
+          break
 
       # log passed all the filters, yield it
-      if keep: yield cleaned
-      # if keep: yield line
+      if keep:
+        yield cleaned
 
   def cleanMatch(self, label, match):
     """Clean a matched string
